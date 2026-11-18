@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Notes Summarizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">A</span><span>Academic<span class="brand-light">Notes</span></span></a>
+    <span class="topbar-note"><span class="status-dot"></span> Your personal study workspace</span>
+  </nav>
+
+  <main class="container app-shell">
+    <section class="hero">
+      <div class="eyebrow">LEARN WITH CLARITY</div>
+      <h1>Make your notes<br><em>make sense.</em></h1>
+      <p>Transform lengthy academic material into structured, easy-to-study notes — ready for your next revision session.</p>
+      <div class="hero-tags"><span>✦ AI-powered learning</span><span>·</span><span>Private by design</span><span>·</span><span>English & Urdu</span></div>
+    </section>
+
+    <section class="workspace">
+      <div class="section-heading">
+        <div><span class="step-label">01 / YOUR MATERIAL</span><h2>Start with your notes</h2><p>Paste your content or upload a PDF lecture document.</p></div>
+        <span class="privacy-pill">⌑ Processed temporarily</span>
+      </div>
+
+      <form id="summaryForm">
+        <label for="notes" class="field-label">Paste academic notes</label>
+        <textarea id="notes" name="notes" class="notes-input" placeholder="Paste your lecture notes, textbook extracts, or research material here..."></textarea>
+        <div class="input-divider"><span>OR UPLOAD A DOCUMENT</span></div>
+        <label for="pdf" class="upload-zone" id="uploadZone">
+          <span class="upload-icon">↑</span>
+          <span class="upload-copy"><strong>Choose a PDF file</strong><small>PDF only · Maximum file size 12 MB</small></span>
+          <span class="browse-button">Browse files</span>
+          <input type="file" id="pdf" name="pdf" accept=".pdf,application/pdf" hidden>
+        </label>
+        <div id="fileName" class="file-name" aria-live="polite"></div>
+
+        <div class="options-grid">
+          <div>
+            <label for="style" class="field-label">Summary style</label>
+            <select id="style" name="style" class="form-select">
+              <option value="short">Short Summary</option>
+              <option value="detailed">Detailed Summary</option>
+              <option value="exam">Exam Preparation Notes</option>
+            </select>
+          </div>
+          <div>
+            <label for="language" class="field-label">Output language</label>
+            <select id="language" name="language" class="form-select">
+              <option value="English">English</option>
+              <option value="Urdu">Urdu</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-footer">
+          <span class="helper-text">Your API key stays on your computer.</span>
+          <button type="submit" class="generate-btn" id="generateBtn">Generate Summary <span>↗</span></button>
+        </div>
+      </form>
+      <div id="alertBox" class="alert-box" role="alert" hidden></div>
+      <div id="loading" class="loading-state" hidden><span class="spinner"></span><div><strong>Preparing your study material</strong><small>Reading your content and organizing the key ideas…</small></div></div>
+    </section>
+
+    <section id="results" class="results-section" hidden>
+      <div class="results-heading">
+        <div><span class="step-label">02 / YOUR STUDY GUIDE</span><h2>Your study material</h2><p>Organized from the content you provided.</p></div>
+        <div class="result-actions">
+          <button type="button" class="soft-btn" id="copyBtn">Copy Summary</button>
+          <button type="button" class="soft-btn" id="downloadBtn">↓ Download .txt</button>
+        </div>
+      </div>
+      <div id="resultCards" class="result-grid"></div>
+      <div class="bottom-actions">
+        <button type="button" class="soft-btn" id="againBtn">↻ Generate Again</button>
+        <button type="button" class="clear-btn" id="clearBtn">Clear All</button>
+      </div>
+    </section>
+
+    <footer><span>ACADEMIC NOTES SUMMARIZER</span><span>Thoughtful learning, one page at a time.</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
